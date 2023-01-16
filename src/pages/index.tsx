@@ -5,7 +5,7 @@ import { GetServerSideProps } from "next";
 import { GraphQLClient, gql } from "graphql-request";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 type Props = {
   exhibitions: Exhibitions[];
@@ -22,10 +22,11 @@ export default function Home({ exhibitions }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={inter.className}>
+      {/* <main className={inter.className}> */}
+      <main>
         {exhibitions.map((exhibition) => (
           <li key={exhibition.slug}>
-            <Link href={`/exhibitions/${exhibition.slug}`}>
+            <Link href={`/exhibition/${exhibition.slug}`}>
               <h1>{exhibition.title}</h1>
             </Link>
           </li>
@@ -36,22 +37,21 @@ export default function Home({ exhibitions }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_URL);
+  const client = new GraphQLClient(
+    process.env.NEXT_PUBLIC_GRAPHCMS_URL as string
+  );
+
   const query = gql`
     query Exhibitions {
       exhibitions {
-        date
-        description
         id
         slug
         title
-        content {
-          html
-        }
+        date
         image {
-          id
           url(transformation: { image: { resize: { fit: max } } })
         }
+        description
       }
     }
   `;
