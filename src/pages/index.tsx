@@ -1,15 +1,13 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import { GetServerSideProps } from "next";
-import { GraphQLClient, gql } from "graphql-request";
-import Link from "next/link";
+import Head from 'next/head'
+import Image from 'next/image'
 
-// const inter = Inter({ subsets: ["latin"] });
+import { GetServerSideProps } from 'next'
+import { GraphQLClient, gql } from 'graphql-request'
+import Link from 'next/link'
 
 type Props = {
-  exhibitions: Exhibitions[];
-};
+  exhibitions: Exhibitions[]
+}
 
 export default function Home({ exhibitions }: Props) {
   // console.log(`====> Exhibitions`, exhibitions);
@@ -22,7 +20,6 @@ export default function Home({ exhibitions }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <main className={inter.className}> */}
       <main>
         {exhibitions.map((exhibition) => (
           <li key={exhibition.slug}>
@@ -33,13 +30,13 @@ export default function Home({ exhibitions }: Props) {
         ))}
       </main>
     </>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const client = new GraphQLClient(
     process.env.NEXT_PUBLIC_GRAPHCMS_URL as string
-  );
+  )
 
   const query = gql`
     query Exhibitions {
@@ -54,10 +51,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
         description
       }
     }
-  `;
-  const data = await client.request(query);
+  `
+  const data = await client.request(query)
 
   return {
     props: { exhibitions: data.exhibitions },
-  };
-};
+  }
+}

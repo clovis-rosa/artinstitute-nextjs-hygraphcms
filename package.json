@@ -13,7 +13,8 @@
     "graphql-request": "^5.1.0",
     "next": "13.1.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "styled-components": "^6.0.0-beta.9"
   },
   "devDependencies": {
     "@next/font": "13.1.2",
@@ -23,5 +24,22 @@
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "typescript": "4.9.4"
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "arrowParens": "always",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "semi": false,
+    "trailingComma": "es5",
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "jsxSingleQuote": false,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "useTabs": false
   }
 }
