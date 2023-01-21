@@ -1,29 +1,27 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
-import { GraphQLClient, gql } from "graphql-request";
-import Link from "next/link";
+import Head from 'next/head'
+import Image from 'next/image'
+import { Inter } from '@next/font/google'
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
+import { GraphQLClient, gql } from 'graphql-request'
+import Link from 'next/link'
 
-const client = new GraphQLClient(
-  process.env.NEXT_PUBLIC_GRAPHCMS_URL as string
-);
+const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_URL as string)
 
 // type IEvent = {
 //   exhibition: Exhibitions[];
 // };
 
 interface IEvent {
-  id: string;
-  slug: string;
-  title: string;
-  date: string;
+  id: string
+  slug: string
+  title: string
+  date: string
   image: {
-    id: string;
-    url: string;
-  };
-  description: string;
-  content: { html: string };
+    id: string
+    url: string
+  }
+  description: string
+  content: { html: string }
 }
 
 export default function Exhibition({ exhibition }: { exhibition: IEvent }) {
@@ -45,13 +43,13 @@ export default function Exhibition({ exhibition }: { exhibition: IEvent }) {
         <div dangerouslySetInnerHTML={{ __html: exhibition.content.html }} />
       </main>
     </>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params.slug as string;
+  const slug = params.slug as string
 
-  console.log(slug);
+  console.log(slug)
 
   const query = gql`
     query Exhibition($slug: String!) {
@@ -70,18 +68,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
       }
     }
-  `;
+  `
 
   const data: { exhibition: IEvent | null } = await client.request(query, {
     slug,
-  });
+  })
 
   // console.log(`=====> DATA`, data);
 
   if (!data.exhibition) {
     return {
       notFound: true,
-    };
+    }
   }
 
   // const source = await serialize(data.event.description);
@@ -90,8 +88,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // props: { event: { ...data.event, source } },
     props: { exhibition: { ...data.exhibition } },
     // revalidate: 60 * 60,
-  };
-};
+    revalidate: 60,
+  }
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const query = gql`
@@ -100,8 +99,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         slug
       }
     }
-  `;
-  const data = await client.request(query);
+  `
+  const data = await client.request(query)
 
   // console.log(`====> slug`, data);
 
@@ -109,6 +108,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: data.exhibitions.map((exhibition) => ({
       params: { slug: exhibition.slug },
     })),
-    fallback: "blocking",
-  };
-};
+    fallback: 'blocking',
+  }
+}

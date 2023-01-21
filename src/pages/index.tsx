@@ -24,7 +24,9 @@ export default function Home({ exhibitions }: Props) {
         {exhibitions.map((exhibition) => (
           <li key={exhibition.slug}>
             <Link href={`/exhibition/${exhibition.slug}`}>
+              <img src={exhibition.image.url} alt={exhibition.slug} />
               <h1>{exhibition.title}</h1>
+              <p>{exhibition.description}</p>
             </Link>
           </li>
         ))}
@@ -46,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         title
         date
         image {
-          url(transformation: { image: { resize: { fit: max } } })
+          url(transformation: { document: { output: { format: webp } } })
         }
         description
       }
