@@ -11,7 +11,7 @@ export default function Exhibitions({ exhibitions }: Props) {
   const [, ...rest] = exhibitions.slice(0, 4)
 
   return (
-    <>
+    <StyledExhibitions>
       {rest.map(({ id, slug, title, description, image }) => (
         <ExhibitionCard key={id}>
           <Link href={`/exhibition/${slug}`}>
@@ -21,19 +21,20 @@ export default function Exhibitions({ exhibitions }: Props) {
           </Link>
         </ExhibitionCard>
       ))}
-    </>
+    </StyledExhibitions>
   )
 }
 
 const StyledExhibitions = styled.div`
-  /* display: grid; */
-  /* grid-template-columns: repeat(3, 1fr); */
-  /* gap: 2.5rem; */
-  grid-area: exhibition;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
 `
 
 const ExhibitionCard = styled.article`
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 `

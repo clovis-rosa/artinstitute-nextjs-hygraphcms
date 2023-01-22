@@ -21,29 +21,49 @@ export default function LastetExhibition({ exhibition }: Props) {
             />
           </Link>
         </HighlightImage>
+        <HighlightText>
+          <h1>{exhibition[0].title}</h1>
+          <p>{exhibition[0].description}</p>
+        </HighlightText>
       </StyledHighlight>
-      <HighlightText>
-        <h1>{exhibition[0].title}</h1>
-        <p>{exhibition[0].description}</p>
-      </HighlightText>
     </>
   )
 }
 
 const StyledHighlight = styled.article`
-  grid-area: highlight;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  // Sets one column free here so the text block can fill the empty space
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
 `
 
 const HighlightImage = styled.div`
+  grid-column-start: 1;
+  grid-column-end: 3;
   height: auto;
+  // Sets one column free here so the text block can fill the empty space
 
-  img {
-    width: 100% !important;
-    height: auto !important;
+  a {
+    img {
+      width: 100% !important;
+      height: auto !important;
+    }
   }
 `
 
-const HighlightText = styled.div``
+const HighlightText = styled.div`
+  h1 {
+    /* font-family: 'inter'; */
+    font-size: 3.125rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 36px;
+    letter-spacing: normal;
+  }
+`

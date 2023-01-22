@@ -2,23 +2,16 @@ import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { GraphQLClient, gql } from 'graphql-request'
 
-import LastetExhibition from '@/components/LatestExhibition'
-import Exhibitions from '@/components/Exhibitions'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { styled } from 'styled-components'
 
 type Props = {
   exhibitions: Exhibitions[]
 }
 
-import { Inter } from '@next/font/google'
-
-const inter = Inter({
-  // weight: ['300', '400', '500'],
-  // display: 'swap',
-  subsets: ['latin'],
-})
-
-export default function Home({ exhibitions }: Props) {
+export default function ExhibitionPage({ exhibitions }: Props) {
   return (
     <>
       <Head>
@@ -27,31 +20,46 @@ export default function Home({ exhibitions }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={inter.className}>
-        <ContainerSection>
-          {/* Latest Exhibition */}
-          <LastetExhibition exhibition={exhibitions} />
+      <main>
+        <Container>
           <InfoCard>
             <p>
-              <strong>Stay Informed. </strong>Sign up to receive bimonthly
-              emails from Mia.
+              <strong>Meaning of Lorem Ipsum. </strong>Lorem ipsum was
+              purposefully designed to have no meaning, but appear like real
+              text, making it the perfect placeholder.
             </p>
           </InfoCard>
-        </ContainerSection>
-        <ContainerSection>
-          <Exhibitions exhibitions={exhibitions} />
-        </ContainerSection>
+
+          <ExhibitionGrid>
+            {/* All Exhibitions */}
+            {exhibitions.map(({ id, slug, title, description, image }) => (
+              <article key={id}>
+                <Link href={`/exhibition/${slug}`}>
+                  <Image src={image.url} alt={slug} width={600} height={400} />
+                  <h1>{title}</h1>
+                  <p>{description}</p>
+                </Link>
+              </article>
+            ))}
+          </ExhibitionGrid>
+        </Container>
       </main>
     </>
   )
 }
 
-const ContainerSection = styled.section`
+const Container = styled.section`
   max-width: 1280px;
   margin: 0 auto;
 `
 
 const InfoCard = styled.div``
+
+const ExhibitionGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+`
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const client = new GraphQLClient(

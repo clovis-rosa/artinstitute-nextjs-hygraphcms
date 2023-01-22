@@ -1,7 +1,4 @@
 import { createGlobalStyle } from 'styled-components'
-import { Inter } from '@next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -23,7 +20,6 @@ html, body {
 }
 
 body {
-  font-family: ${inter.style.fontFamily}, var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
