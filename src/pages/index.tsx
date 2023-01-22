@@ -1,16 +1,36 @@
 import Head from 'next/head'
-import Image from 'next/image'
-
 import { GetServerSideProps } from 'next'
 import { GraphQLClient, gql } from 'graphql-request'
-import Link from 'next/link'
+
+import LastetExhibition from '@/components/LatestExhibition'
+import Exhibitions from '@/components/Exhibitions'
 
 type Props = {
   exhibitions: Exhibitions[]
 }
 
+// interface Props {
+//   exhibitions: {
+//     date: string
+//     description: string
+//     id: string
+//     slug: string
+//     title: string
+//     content: {
+//       html: string
+//     }
+//     image: {
+//       id: string
+//       url: string
+//     }
+//   }
+// }
+
 export default function Home({ exhibitions }: Props) {
   // console.log(`====> Exhibitions`, exhibitions);
+
+  // Return the array minus the first element
+  const [, ...rest] = exhibitions
 
   return (
     <>
@@ -21,15 +41,20 @@ export default function Home({ exhibitions }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {exhibitions.map((exhibition) => (
-          <li key={exhibition.slug}>
-            <Link href={`/exhibition/${exhibition.slug}`}>
-              <img src={exhibition.image.url} alt={exhibition.slug} />
-              <h1>{exhibition.title}</h1>
-              <p>{exhibition.description}</p>
-            </Link>
-          </li>
-        ))}
+        <ul>
+          <LastetExhibition exhibitions={exhibitions} />
+          <div>
+            <p>
+              <strong>Stay Informed. </strong>Sign up to receive bimonthly
+              emails from Mia.
+            </p>
+          </div>
+
+          {/* blogs */}
+          {[, ...rest].map((exhibitions) => (
+            <Exhibitions key={exhibitions.id} exhibitions={exhibitions} />
+          ))}
+        </ul>
       </main>
     </>
   )

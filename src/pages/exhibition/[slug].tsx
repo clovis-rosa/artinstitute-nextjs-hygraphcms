@@ -12,19 +12,21 @@ const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_URL as string)
 // };
 
 interface IEvent {
-  id: string
-  slug: string
-  title: string
-  date: string
-  image: {
+  exhibition: {
     id: string
-    url: string
+    slug: string
+    title: string
+    date: string
+    image: {
+      id: string
+      url: string
+    }
+    description: string
+    content: { html: string }
   }
-  description: string
-  content: { html: string }
 }
 
-export default function Exhibition({ exhibition }: { exhibition: IEvent }) {
+export default function Exhibition({ exhibition }: IEvent) {
   // console.log(`====> Exhibitions`, exhibition);
 
   return (
