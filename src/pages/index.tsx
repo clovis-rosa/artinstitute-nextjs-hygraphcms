@@ -4,6 +4,7 @@ import { GraphQLClient, gql } from 'graphql-request'
 
 import LastetExhibition from '@/components/LatestExhibition'
 import Exhibitions from '@/components/Exhibitions'
+import { styled } from 'styled-components'
 
 type Props = {
   exhibitions: Exhibitions[]
@@ -19,23 +20,40 @@ export default function Home({ exhibitions }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <section>
+        <Container>
           {/* Latest Exhibition */}
           <LastetExhibition exhibition={exhibitions} />
-          <div>
+          <InfoCard>
             <p>
               <strong>Stay Informed. </strong>Sign up to receive bimonthly
               emails from Mia.
             </p>
-          </div>
+          </InfoCard>
 
-          {/* All Exhibition  */}
+          {/* All Exhibition */}
           <Exhibitions exhibitions={exhibitions} />
-        </section>
+        </Container>
       </main>
     </>
   )
 }
+
+const Container = styled.section`
+  max-width: 1280px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-areas:
+    'highlight highlight highlight'
+    'info info info'
+    'exhibition exhibition exhibition';
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+`
+
+const InfoCard = styled.div`
+  grid-area: info;
+`
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const client = new GraphQLClient(

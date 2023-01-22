@@ -45,8 +45,4 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-img {
-  width: 50%;
-  height: auto;
-}
 `
