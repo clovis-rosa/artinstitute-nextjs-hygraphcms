@@ -1,39 +1,25 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface Props {
-  exhibitions: {
-    date: string
-    description: string
-    id: string
-    slug: string
-    title: string
-    content: {
-      html: string
-    }
-    image: {
-      id: string
-      url: string
-    }
-  }
+type Props = {
+  exhibitions: Exhibitions[]
 }
 
 export default function Exhibitions({ exhibitions }: Props) {
+  // Return the array minus the first element
+  const [, ...rest] = exhibitions
+
   return (
     <>
-      {/* All Exhibitions */}
-      <li>
-        <Link href={`/exhibition/${exhibitions.slug}`}>
-          <Image
-            src={exhibitions.image.url}
-            alt={exhibitions.slug}
-            width={600}
-            height={400}
-          />
-          <h1>{exhibitions.title}</h1>
-          <p>{exhibitions.description}</p>
-        </Link>
-      </li>
+      {rest.map(({ id, slug, title, description, image }) => (
+        <article key={id}>
+          <Link href={`/exhibition/${slug}`}>
+            <Image src={image.url} alt={slug} width={600} height={400} />
+            <h1>{title}</h1>
+            <p>{description}</p>
+          </Link>
+        </article>
+      ))}
     </>
   )
 }

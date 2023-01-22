@@ -9,29 +9,7 @@ type Props = {
   exhibitions: Exhibitions[]
 }
 
-// interface Props {
-//   exhibitions: {
-//     date: string
-//     description: string
-//     id: string
-//     slug: string
-//     title: string
-//     content: {
-//       html: string
-//     }
-//     image: {
-//       id: string
-//       url: string
-//     }
-//   }
-// }
-
 export default function Home({ exhibitions }: Props) {
-  // console.log(`====> Exhibitions`, exhibitions);
-
-  // Return the array minus the first element
-  const [, ...rest] = exhibitions
-
   return (
     <>
       <Head>
@@ -41,8 +19,9 @@ export default function Home({ exhibitions }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <ul>
-          <LastetExhibition exhibitions={exhibitions} />
+        <section>
+          {/* Latest Exhibition */}
+          <LastetExhibition exhibition={exhibitions} />
           <div>
             <p>
               <strong>Stay Informed. </strong>Sign up to receive bimonthly
@@ -50,11 +29,9 @@ export default function Home({ exhibitions }: Props) {
             </p>
           </div>
 
-          {/* blogs */}
-          {[, ...rest].map((exhibitions) => (
-            <Exhibitions key={exhibitions.id} exhibitions={exhibitions} />
-          ))}
-        </ul>
+          {/* All Exhibition  */}
+          <Exhibitions exhibitions={exhibitions} />
+        </section>
       </main>
     </>
   )
