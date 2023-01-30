@@ -1,4 +1,4 @@
-import { GlobalStyle } from '@/styles/GlobalStyles'
+// import { GlobalStyle } from '@/styles/GlobalStyles'
 import Document, {
   Head,
   Html,
@@ -19,7 +19,7 @@ export default class MyDocument extends Document {
           enhanceApp: (App) => (props) =>
             sheet.collectStyles(
               <>
-                <GlobalStyle />
+                {/* <GlobalStyle /> */}
                 <App {...props} />
               </>
             ),
@@ -28,12 +28,7 @@ export default class MyDocument extends Document {
       const initialProps = await Document.getInitialProps(ctx)
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        styles: [initialProps.styles, sheet.getStyleElement()],
       }
     } finally {
       sheet.seal()

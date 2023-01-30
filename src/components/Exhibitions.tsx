@@ -27,7 +27,8 @@ export default function Exhibitions({ exhibitions }: Props) {
 
 const StyledExhibitions = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-columns: repeat(3, 1fr); */
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 2.5rem;
 `
 

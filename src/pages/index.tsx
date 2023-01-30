@@ -5,18 +5,11 @@ import { GraphQLClient, gql } from 'graphql-request'
 import LastetExhibition from '@/components/LatestExhibition'
 import Exhibitions from '@/components/Exhibitions'
 import { styled } from 'styled-components'
+import Navigation from '@/components/Navigation'
 
 type Props = {
   exhibitions: Exhibitions[]
 }
-
-import { Inter } from '@next/font/google'
-
-const inter = Inter({
-  // weight: ['300', '400', '500'],
-  // display: 'swap',
-  subsets: ['latin'],
-})
 
 export default function Home({ exhibitions }: Props) {
   return (
@@ -27,7 +20,8 @@ export default function Home({ exhibitions }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={inter.className}>
+      <Navigation />
+      <main>
         <ContainerSection>
           {/* Latest Exhibition */}
           <LastetExhibition exhibition={exhibitions} />
