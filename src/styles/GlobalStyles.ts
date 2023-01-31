@@ -33,6 +33,7 @@ body {
   font-family: var(--font-inter);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-width: 320px;
 }
 
 img, picture, video, canvas, svg {

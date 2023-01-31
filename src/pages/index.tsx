@@ -22,7 +22,7 @@ export default function Home({ exhibitions }: Props) {
       </Head>
       <Navigation />
       <main>
-        <ContainerSection>
+        <Section>
           {/* Latest Exhibition */}
           <LastetExhibition exhibition={exhibitions} />
           <InfoCard>
@@ -31,18 +31,19 @@ export default function Home({ exhibitions }: Props) {
               emails from Mia.
             </p>
           </InfoCard>
-        </ContainerSection>
-        <ContainerSection>
+        </Section>
+        <Section>
           <Exhibitions exhibitions={exhibitions} />
-        </ContainerSection>
+        </Section>
       </main>
     </>
   )
 }
 
-const ContainerSection = styled.section`
-  max-width: 1280px;
+const Section = styled.section`
+  max-width: 84rem;
   margin: 0 auto;
+  padding: 0 2rem;
 `
 
 const InfoCard = styled.div``

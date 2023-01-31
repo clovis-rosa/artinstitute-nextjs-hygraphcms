@@ -3,6 +3,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
   experimental: {
     newNextLinkBehavior: true,
     fontLoaders: [
@@ -11,9 +14,6 @@ const nextConfig = {
         options: { subsets: ['latin'] },
       },
     ],
-  },
-  compiler: {
-    styledComponents: true,
   },
   images: {
     domains: ['media.graphassets.com'],

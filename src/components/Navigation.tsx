@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import IonIcon from '@reacticons/ionicons'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { menudb } from '@/data/menudb'
@@ -6,14 +7,14 @@ import { menudb } from '@/data/menudb'
 interface NavMenu {}
 
 export default function Navigation() {
-  const [mounted, setMounted] = useState(false)
-  const [click, setClick] = useState(false)
+  const [mounted, setMounted] = useState<boolean>(false)
+  const [click, setClick] = useState<boolean>(false)
 
   const handleClick = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
 
   useEffect(() => {
-    document.body.style.overflowY = click ? 'hidden' : 'auto'
+    document.body.style.overflowY = click == true ? 'hidden' : 'auto'
   }, [click])
 
   useEffect(() => {
@@ -23,15 +24,12 @@ export default function Navigation() {
   if (!mounted) return null
 
   return (
-    <NavbarStyles>
-      <Link
-        href="/"
-        className="logo"
-        aria-label="back to home"
-        onClick={closeMobileMenu}
-      >
-        Sao Paulo Institute of Art
-      </Link>
+    <StyledNavigation>
+      <Branding>
+        <Link href="/" onClick={closeMobileMenu} aria-label="back to home">
+          Sao Paulo Institute of Art
+        </Link>
+      </Branding>
 
       <Nav onClick={handleClick} click={click}>
         <ul>
@@ -45,36 +43,37 @@ export default function Navigation() {
         </ul>
       </Nav>
       <MobileMenu onClick={handleClick}>
-        {click ? <MobileMenuClose /> : <MobileMenuOpen />}
+        {click === true ? (
+          <IonIcon name="close-outline" />
+        ) : (
+          <IonIcon name="menu-outline" />
+        )}
       </MobileMenu>
-    </NavbarStyles>
+    </StyledNavigation>
   )
 }
 
-const NavbarStyles = styled.header`
-  height: 96px;
-  /* padding: 2rem 0 3rem 0; */
-  padding: 3rem 0;
-  min-width: 320px;
+const StyledNavigation = styled.header`
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+
+  height: 6rem;
   display: flex;
   justify-content: space-between;
-  /* align-items: baseline; */
   align-items: center;
-  z-index: 100;
   transition: height 0.2s ease;
-  /* transition: all 0.6s ease; */
   backface-visibility: hidden;
-
-  max-width: 1280px;
-  margin: 0 auto;
 
   @media only screen and (max-width: 768px) {
     justify-content: space-between;
     align-items: center;
-    padding: 0 16px;
+    padding: 0 1rem;
   }
+`
 
-  a.logo {
+const Branding = styled.div`
+  a {
     font-size: 1.7rem;
     font-weight: 800;
     line-height: 1.1;
@@ -83,6 +82,10 @@ const NavbarStyles = styled.header`
     text-decoration: none;
     border-bottom: 1px solid rgba(35, 31, 32, 0);
     cursor: pointer;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
 `
 
@@ -93,10 +96,10 @@ const Nav = styled.nav<{ click: boolean }>`
 
   @media only screen and (max-width: 768px) {
     position: fixed;
-    top: 96px;
+    top: 6rem;
     left: 0;
+    z-index: 10;
     width: 100%;
-    /* width: ${({ click }) => (click ? '100%' : '-100%')}; */
     display: flex;
     visibility: ${({ click }) => (click ? 'visible' : 'hidden')};
     opacity: ${({ click }) => (click ? '1' : '0')};
@@ -117,25 +120,30 @@ const Nav = styled.nav<{ click: boolean }>`
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(8px);
-      pointer-events: none;
       transition: all 0.2s ease-in-out;
     }
   }
 
   ul {
     display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 1.5rem;
     list-style: none;
 
     @media only screen and (max-width: 768px) {
       flex-direction: column;
+      gap: 0;
     }
 
     li {
-      margin-left: 24px;
-      font-size: inherit;
-      font-weight: 500;
-      white-space: nowrap;
+      @media only screen and (max-width: 768px) {
+        width: calc(100% - 2rem);
+
+        &:not(:first-of-type) {
+          border-top: 2px solid #d6d6d6;
+        }
+      }
 
       a {
         font-size: 0.8rem;
@@ -151,25 +159,15 @@ const Nav = styled.nav<{ click: boolean }>`
         &:hover {
           border-bottom: 1px solid rgba(35, 31, 32, 0.85);
         }
-      }
 
-      @media only screen and (max-width: 768px) {
-        width: calc(100% - 32px);
-        margin: 0;
-        font-size: 18px;
-
-        &.show-mobile {
-          display: block;
-        }
-
-        &:not(:first-of-type) a:not(.button) {
-          border-top: 2px solid #d6d6d6;
-        }
-
-        a {
+        @media only screen and (max-width: 768px) {
           width: 100%;
           display: block;
-          padding: 24px 0 24px 12px;
+          padding: 1.5rem 0;
+
+          &:hover {
+            border-bottom: 1px solid transparent;
+          }
         }
       }
     }
@@ -177,55 +175,20 @@ const Nav = styled.nav<{ click: boolean }>`
 `
 
 const MobileMenu = styled.div`
-  svg {
-    margin: 0 4px;
-    stroke: black;
-    cursor: pointer;
+  span {
+    display: inline-flex !important;
+    align-items: center !important;
+    height: 2.5rem !important;
+    width: 2.5rem !important;
+
+    svg {
+      margin: 0.25rem;
+      stroke: black;
+      cursor: pointer;
+    }
   }
 
   @media only screen and (min-width: 768px) {
-    svg {
-      display: none;
-    }
+    display: none !important;
   }
 `
-
-const MobileMenuOpen = () => {
-  return (
-    <svg
-      id="headerMobileMenuOpen"
-      className="menu"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-      strokeWidth="2"
-      strokeMiterlimit="10"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M5 18h7m-7-6h14M5 6h14"></path>
-    </svg>
-  )
-}
-
-const MobileMenuClose = () => {
-  return (
-    <svg
-      id="headerMobileMenuClose"
-      className="menu"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-    >
-      <path
-        d="M17 7L7 17m10 0L7 7"
-        strokeWidth="2"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      ></path>
-    </svg>
-  )
-}
