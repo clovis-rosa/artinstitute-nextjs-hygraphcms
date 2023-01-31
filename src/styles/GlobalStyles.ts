@@ -11,8 +11,7 @@ export const GlobalStyle = createGlobalStyle`
 
 :root {
   --font-inter: ${fontInter.style.fontFamily};
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
 }
 
 *, 
@@ -23,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 html, body { 
@@ -30,7 +30,7 @@ html, body {
 }
 
 body {
-  font-family: var(--font-inter);
+  font-family: var(--font-inter), sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-width: 320px;
