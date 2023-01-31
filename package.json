@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clr": "rm -rf .next node_modules yarn.lock package-lock.json"
   },
   "dependencies": {
     "@reacticons/ionicons": "^6.0.4",
@@ -42,5 +43,13 @@
     "quoteProps": "as-needed",
     "requirePragma": false,
     "useTabs": false
+  },
+  "browserslist": {
+    "production": [
+      "last 2 versions"
+    ],
+    "development": [
+      "last 1 Firefox versions"
+    ]
   }
 }

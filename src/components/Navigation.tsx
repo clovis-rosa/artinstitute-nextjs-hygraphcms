@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import IonIcon from '@reacticons/ionicons'
 import Link from 'next/link'
 import styled from 'styled-components'
+import IonIcon from '@reacticons/ionicons'
 import { menudb } from '@/data/menudb'
 
-interface NavMenu {}
-
 export default function Navigation() {
-  const [mounted, setMounted] = useState<boolean>(false)
   const [click, setClick] = useState<boolean>(false)
 
   const handleClick = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
 
   useEffect(() => {
-    document.body.style.overflowY = click == true ? 'hidden' : 'auto'
+    document.body.style.overflowY = click ? 'hidden' : 'auto'
   }, [click])
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
 
   return (
     <StyledNavigation>
@@ -31,7 +22,7 @@ export default function Navigation() {
         </Link>
       </Branding>
 
-      <Nav onClick={handleClick} click={click}>
+      <Navbar onClick={handleClick} clicked={click}>
         <ul>
           {menudb.map(({ id, label, href }) => (
             <li key={id}>
@@ -41,7 +32,8 @@ export default function Navigation() {
             </li>
           ))}
         </ul>
-      </Nav>
+      </Navbar>
+
       <MobileMenu onClick={handleClick}>
         {click === true ? (
           <IonIcon name="close-outline" />
@@ -65,7 +57,7 @@ const StyledNavigation = styled.header`
   transition: height 0.2s ease;
   backface-visibility: hidden;
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 960px) {
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
@@ -83,26 +75,26 @@ const Branding = styled.div`
     border-bottom: 1px solid rgba(35, 31, 32, 0);
     cursor: pointer;
 
-    @media only screen and (max-width: 768px) {
+    @media (max-width: 960px) {
       font-size: 1.2rem;
     }
   }
 `
 
-const Nav = styled.nav<{ click: boolean }>`
+const Navbar = styled.nav<{ clicked: boolean }>`
   display: flex;
   justify-content: flex-end;
   flex: 1;
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 960px) {
     position: fixed;
     top: 6rem;
     left: 0;
     z-index: 10;
     width: 100%;
     display: flex;
-    visibility: ${({ click }) => (click ? 'visible' : 'hidden')};
-    opacity: ${({ click }) => (click ? '1' : '0')};
+    visibility: ${({ clicked }) => (clicked ? 'visible' : 'hidden')};
+    opacity: ${({ clicked }) => (clicked ? '1' : '0')};
     padding-bottom: 24px;
     flex-direction: column;
     background: white;
@@ -112,7 +104,7 @@ const Nav = styled.nav<{ click: boolean }>`
 
     &::after {
       content: '';
-      visibility: ${({ click }) => (click ? 'visible' : 'hidden')};
+      visibility: ${({ clicked }) => (clicked ? 'visible' : 'hidden')};
       position: absolute;
       top: 100%;
       right: 0;
@@ -131,13 +123,13 @@ const Nav = styled.nav<{ click: boolean }>`
     gap: 1.5rem;
     list-style: none;
 
-    @media only screen and (max-width: 768px) {
+    @media (max-width: 960px) {
       flex-direction: column;
       gap: 0;
     }
 
     li {
-      @media only screen and (max-width: 768px) {
+      @media (max-width: 960px) {
         width: calc(100% - 2rem);
 
         &:not(:first-of-type) {
@@ -160,7 +152,7 @@ const Nav = styled.nav<{ click: boolean }>`
           border-bottom: 1px solid rgba(35, 31, 32, 0.85);
         }
 
-        @media only screen and (max-width: 768px) {
+        @media (max-width: 960px) {
           width: 100%;
           display: block;
           padding: 1.5rem 0;
@@ -174,12 +166,20 @@ const Nav = styled.nav<{ click: boolean }>`
   }
 `
 
-const MobileMenu = styled.div`
+const MobileMenu = styled.button`
+  font: inherit;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border: none;
+  outline: inherit;
+  cursor: pointer;
+
   span {
     display: inline-flex !important;
     align-items: center !important;
-    height: 2.5rem !important;
-    width: 2.5rem !important;
+    height: 3rem !important;
+    width: 3rem !important;
 
     svg {
       margin: 0.25rem;
@@ -188,7 +188,7 @@ const MobileMenu = styled.div`
     }
   }
 
-  @media only screen and (min-width: 768px) {
+  @media (min-width: 960px) {
     display: none !important;
   }
 `
