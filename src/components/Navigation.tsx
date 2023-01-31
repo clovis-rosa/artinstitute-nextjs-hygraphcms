@@ -50,7 +50,7 @@ const StyledNavigation = styled.header`
   margin: 0 auto;
   padding: 3rem 2rem;
 
-  height: 6rem;
+  /* height: 6rem; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,7 +60,7 @@ const StyledNavigation = styled.header`
   @media (max-width: 960px) {
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
+    padding: 2rem;
   }
 `
 
@@ -88,7 +88,7 @@ const Navbar = styled.nav<{ clicked: boolean }>`
 
   @media (max-width: 960px) {
     position: fixed;
-    top: 6rem;
+    top: 7rem;
     left: 0;
     z-index: 10;
     width: 100%;
