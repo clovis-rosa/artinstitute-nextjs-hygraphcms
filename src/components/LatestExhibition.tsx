@@ -9,7 +9,6 @@ type Props = {
 export default function LastetExhibition({ exhibition }: Props) {
   return (
     <>
-      {/* Latest Exhibition */}
       <HighlightCard>
         <HighlightImage>
           <Link href={`/exhibition/${exhibition[0].slug}`}>
@@ -26,6 +25,12 @@ export default function LastetExhibition({ exhibition }: Props) {
           <p>{exhibition[0].description}</p>
         </HighlightText>
       </HighlightCard>
+      <InfoCard>
+        <p>
+          <strong>Stay Informed. </strong>Sign up to receive bimonthly emails
+          from Mia.
+        </p>
+      </InfoCard>
     </>
   )
 }
@@ -51,7 +56,6 @@ const HighlightImage = styled.div`
 
 const HighlightText = styled.div`
   h1 {
-    /* font-family: 'inter'; */
     font-size: 3.125rem;
     font-weight: 800;
     line-height: 1.1;
@@ -66,3 +70,5 @@ const HighlightText = styled.div`
     letter-spacing: normal;
   }
 `
+
+const InfoCard = styled.div``

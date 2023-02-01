@@ -15,12 +15,6 @@ export default function Home({ exhibitions }: Props) {
     <SiteLayout pageTitle="Home">
       <Section>
         <LastetExhibition exhibition={exhibitions} />
-        <InfoCard>
-          <p>
-            <strong>Stay Informed. </strong>Sign up to receive bimonthly emails
-            from Mia.
-          </p>
-        </InfoCard>
       </Section>
       <Section>
         <Exhibitions exhibitions={exhibitions} />
@@ -34,8 +28,6 @@ const Section = styled.section`
   margin: 0 auto;
   padding: 0 2rem;
 `
-
-const InfoCard = styled.div``
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const client = new GraphQLClient(
