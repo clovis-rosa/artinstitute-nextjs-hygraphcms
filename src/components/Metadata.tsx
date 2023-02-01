@@ -1,14 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-interface SeoProps {
-  pageTitle?: string
-  title?: string
-  description?: string
-  date?: string
-}
-
-export function Metadata({ pageTitle, title, description, date }: SeoProps) {
+export function Metadata({ pageTitle, description, date }: SeoProps) {
   const router = useRouter()
   const meta = {
     name: 'Sao Paulo Institute of Art',

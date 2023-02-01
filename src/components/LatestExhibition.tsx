@@ -11,7 +11,7 @@ export default function LastetExhibition({ exhibition }: Props) {
     <>
       <HighlightCard>
         <HighlightImage>
-          <Link href={`/exhibition/${exhibition[0].slug}`}>
+          <Link href={`/exhibitions/${exhibition[0].slug}`}>
             <Image
               src={exhibition[0].image.url}
               alt={exhibition[0].slug}

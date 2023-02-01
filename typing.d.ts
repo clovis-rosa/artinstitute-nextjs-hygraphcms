@@ -11,7 +11,7 @@ type Exhibitions = {
     id: string
     url: string
   }
-  exhibitions: {
+  exhibition: {
     date: string
     description: string
     id: string
@@ -24,6 +24,16 @@ type Exhibitions = {
       id: string
       url: string
     }
-    0: any
+    0?: any
   }
+}
+
+type SeoProps = {
+  pageTitle: string
+  description?: string
+  date?: string
+}
+
+interface LayoutProps extends SeoProps {
+  children: React.ReactNode
 }
