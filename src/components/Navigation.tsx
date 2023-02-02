@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import IonIcon from '@reacticons/ionicons'
 import { menudb } from '@/data/menudb'
+import { HiBars4, HiXMark } from 'react-icons/hi2'
 
 export default function Navigation() {
+  // const [mounted, setMounted] = useState<boolean>(false)
   const [click, setClick] = useState<boolean>(false)
 
   const handleClick = () => setClick(!click)
@@ -22,7 +23,7 @@ export default function Navigation() {
         </Link>
       </Branding>
 
-      <Navbar onClick={handleClick} clicked={click}>
+      <Navbar onClick={handleClick} click={click}>
         <ul>
           {menudb.map(({ id, label, href }) => (
             <li key={id}>
@@ -35,11 +36,7 @@ export default function Navigation() {
       </Navbar>
 
       <MobileMenu onClick={handleClick}>
-        {click === true ? (
-          <IonIcon name="close-outline" />
-        ) : (
-          <IonIcon name="menu-outline" />
-        )}
+        {click ? <HiXMark /> : <HiBars4 />}
       </MobileMenu>
     </StyledNavigation>
   )
@@ -49,8 +46,8 @@ const StyledNavigation = styled.header`
   max-width: 84rem;
   margin: 0 auto;
   padding: 3rem 2rem;
+  height: 8rem;
 
-  /* height: 6rem; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,7 +57,11 @@ const StyledNavigation = styled.header`
   @media (max-width: 960px) {
     justify-content: space-between;
     align-items: center;
+  }
+
+  @media (max-width: 640px) {
     padding: 2rem;
+    height: 7rem;
   }
 `
 
@@ -81,30 +82,29 @@ const Branding = styled.div`
   }
 `
 
-const Navbar = styled.nav<{ clicked: boolean }>`
+const Navbar = styled.nav<{ click: boolean }>`
   display: flex;
   justify-content: flex-end;
   flex: 1;
 
   @media (max-width: 960px) {
     position: fixed;
-    top: 7rem;
+    top: 8rem;
     left: 0;
     z-index: 10;
     width: 100%;
     display: flex;
-    visibility: ${({ clicked }) => (clicked ? 'visible' : 'hidden')};
-    opacity: ${({ clicked }) => (clicked ? '1' : '0')};
+    visibility: ${({ click }) => (click === true ? 'visible' : 'hidden')};
+    opacity: ${({ click }) => (click === true ? '1' : '0')};
     padding-bottom: 24px;
     flex-direction: column;
     background: white;
-    z-index: 1;
     backface-visibility: hidden;
     transition: all 0.2s ease-in-out;
 
     &::after {
       content: '';
-      visibility: ${({ clicked }) => (clicked ? 'visible' : 'hidden')};
+      visibility: ${({ click }) => (click === true ? 'visible' : 'hidden')};
       position: absolute;
       top: 100%;
       right: 0;
@@ -114,6 +114,10 @@ const Navbar = styled.nav<{ clicked: boolean }>`
       backdrop-filter: blur(8px);
       transition: all 0.2s ease-in-out;
     }
+  }
+
+  @media (max-width: 640px) {
+    top: 7rem;
   }
 
   ul {
@@ -175,17 +179,15 @@ const MobileMenu = styled.button`
   outline: inherit;
   cursor: pointer;
 
-  span {
-    display: inline-flex !important;
-    align-items: center !important;
-    height: 3rem !important;
-    width: 3rem !important;
+  display: inline-flex;
+  align-items: center;
 
-    svg {
-      margin: 0.25rem;
-      stroke: black;
-      cursor: pointer;
-    }
+  svg {
+    margin: 0.25rem;
+    fill: black;
+    stroke: black;
+    height: 2rem;
+    width: 2rem;
   }
 
   @media (min-width: 960px) {

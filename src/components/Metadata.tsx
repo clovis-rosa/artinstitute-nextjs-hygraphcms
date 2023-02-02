@@ -28,7 +28,7 @@ export function Metadata({ pageTitle, description, date }: SeoProps) {
         name="viewport"
         content="width=device-width, height=device-height, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
       ></meta>
-      <meta name="theme-color" content="#1B1A16"></meta>
+      <meta name="theme-color" content="#ffffff"></meta>
       <meta name="robots" content="follow, index" />
       <meta content={meta.description} name="description" />
       <meta property="og:url" content={`${meta.website}${router.asPath}`} />

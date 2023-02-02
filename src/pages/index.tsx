@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { GraphQLClient, gql } from 'graphql-request'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 import SiteLayout from '@/layouts/SiteLayout'
 import LastetExhibition from '@/components/LatestExhibition'
