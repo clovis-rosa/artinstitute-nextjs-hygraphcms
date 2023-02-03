@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
+import CardInfo from '@/components/CardInfo'
 
 type Props = {
   exhibition: Exhibitions[]
@@ -26,12 +27,7 @@ export default function FeaturedHero({ exhibition }: Props) {
           <Link href="/visit">Plan Your Visit</Link>
         </HeroText>
       </StyledHero>
-      <InfoCard>
-        <p>
-          <strong>Stay Informed. </strong>Sign up to receive bimonthly emails
-          from Mia.
-        </p>
-      </InfoCard>
+      <CardInfo />
     </>
   )
 }
