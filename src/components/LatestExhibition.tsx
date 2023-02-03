@@ -21,8 +21,13 @@ export default function LastetExhibition({ exhibition }: Props) {
           </Link>
         </HighlightImage>
         <HighlightText>
+          <h2>Coming soon</h2>
           <h1>{exhibition[0].title}</h1>
+          <h3>
+            A Special Exhibition Designed by Oscar-Winning Artistic Director
+          </h3>
           <p>{exhibition[0].description}</p>
+          <Link href="/visit">Plan Your Visit</Link>
         </HighlightText>
       </HighlightCard>
       <InfoCard>
@@ -55,19 +60,57 @@ const HighlightImage = styled.div`
 `
 
 const HighlightText = styled.div`
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+
+    margin-bottom: 0.875rem;
+  }
+
   h1 {
     font-size: 3.125rem;
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.025em;
+    margin-bottom: 0.875rem;
+  }
+
+  h3 {
+    font-size: 1.03rem;
+    font-weight: 800;
+    line-height: 1.5;
+    margin-bottom: 1rem;
   }
 
   p {
-    margin-top: 20px;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 300;
-    line-height: 36px;
+    line-height: 1.5;
     letter-spacing: normal;
+    margin-top: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  a {
+    display: inline-block;
+    font-size: 1.03rem;
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: -0.01;
+    margin-top: 1.25rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+
+    color: rgba(35, 31, 32, 0.85);
+    border-bottom: 1px solid rgba(35, 31, 32, 0.85);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: black;
+      border-bottom: 1px solid black;
+    }
   }
 `
 

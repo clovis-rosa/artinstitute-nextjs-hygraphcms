@@ -24,7 +24,6 @@ export default function ExhibitionPage({ exhibitions }: Props) {
         </InfoCard>
 
         <ExhibitionGrid>
-          {/* All Exhibitions */}
           {exhibitions.map(({ id, slug, title, description, image }) => (
             <article key={id}>
               <Link href={`/exhibitions/${slug}`}>

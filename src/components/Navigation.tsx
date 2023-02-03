@@ -5,7 +5,6 @@ import { menudb } from '@/data/menudb'
 import { HiBars4, HiXMark } from 'react-icons/hi2'
 
 export default function Navigation() {
-  // const [mounted, setMounted] = useState<boolean>(false)
   const [click, setClick] = useState<boolean>(false)
 
   const handleClick = () => setClick(!click)
@@ -94,8 +93,8 @@ const Navbar = styled.nav<{ click: boolean }>`
     z-index: 10;
     width: 100%;
     display: flex;
-    visibility: ${({ click }) => (click === true ? 'visible' : 'hidden')};
-    opacity: ${({ click }) => (click === true ? '1' : '0')};
+    visibility: ${({ click }) => (click ? 'visible' : 'hidden')};
+    opacity: ${({ click }) => (click ? '1' : '0')};
     padding-bottom: 24px;
     flex-direction: column;
     background: white;
@@ -104,7 +103,7 @@ const Navbar = styled.nav<{ click: boolean }>`
 
     &::after {
       content: '';
-      visibility: ${({ click }) => (click === true ? 'visible' : 'hidden')};
+      visibility: ${({ click }) => (click ? 'visible' : 'hidden')};
       position: absolute;
       top: 100%;
       right: 0;
