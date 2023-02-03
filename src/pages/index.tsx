@@ -3,7 +3,7 @@ import { GraphQLClient, gql } from 'graphql-request'
 import styled from 'styled-components'
 
 import SiteLayout from '@/layouts/SiteLayout'
-import LastetExhibition from '@/components/LatestExhibition'
+import FeaturedHero from '@/components/FeaturedHero'
 import Exhibitions from '@/components/Exhibitions'
 
 type Props = {
@@ -14,7 +14,7 @@ export default function Home({ exhibitions }: Props) {
   return (
     <SiteLayout pageTitle="Home">
       <Section>
-        <LastetExhibition exhibition={exhibitions} />
+        <FeaturedHero exhibition={exhibitions} />
       </Section>
       <Section>
         <Exhibitions exhibitions={exhibitions} />
@@ -40,6 +40,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         id
         slug
         title
+        subtitle
         date
         image {
           url(transformation: { document: { output: { format: webp } } })

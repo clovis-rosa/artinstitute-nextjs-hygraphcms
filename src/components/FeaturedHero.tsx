@@ -6,30 +6,26 @@ type Props = {
   exhibition: Exhibitions[]
 }
 
-export default function LastetExhibition({ exhibition }: Props) {
+export default function FeaturedHero({ exhibition }: Props) {
+  // Gets only the first item of the array
+  const { slug, title, subtitle, description, image } = exhibition[0]
+
   return (
     <>
-      <HighlightCard>
-        <HighlightImage>
-          <Link href={`/exhibitions/${exhibition[0].slug}`}>
-            <Image
-              src={exhibition[0].image.url}
-              alt={exhibition[0].slug}
-              width={800}
-              height={610}
-            />
+      <StyledHero>
+        <HeroImage>
+          <Link href={`/exhibitions/${slug}`}>
+            <Image src={image.url} alt={title} width={800} height={610} />
           </Link>
-        </HighlightImage>
-        <HighlightText>
+        </HeroImage>
+        <HeroText>
           <h2>Coming soon</h2>
-          <h1>{exhibition[0].title}</h1>
-          <h3>
-            A Special Exhibition Designed by Oscar-Winning Artistic Director
-          </h3>
-          <p>{exhibition[0].description}</p>
+          <h1>{title}</h1>
+          <h3>{subtitle}</h3>
+          <p>{description}</p>
           <Link href="/visit">Plan Your Visit</Link>
-        </HighlightText>
-      </HighlightCard>
+        </HeroText>
+      </StyledHero>
       <InfoCard>
         <p>
           <strong>Stay Informed. </strong>Sign up to receive bimonthly emails
@@ -40,13 +36,13 @@ export default function LastetExhibition({ exhibition }: Props) {
   )
 }
 
-const HighlightCard = styled.article`
+const StyledHero = styled.article`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.5rem;
 `
 
-const HighlightImage = styled.div`
+const HeroImage = styled.div`
   grid-column-start: 1;
   grid-column-end: 3;
   height: auto;
@@ -59,7 +55,7 @@ const HighlightImage = styled.div`
   }
 `
 
-const HighlightText = styled.div`
+const HeroText = styled.div`
   h2 {
     font-size: 1.5rem;
     font-weight: 800;

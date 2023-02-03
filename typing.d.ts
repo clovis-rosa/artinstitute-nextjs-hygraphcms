@@ -4,6 +4,7 @@ type Exhibitions = {
   id: string
   slug: string
   title: string
+  subtitle?: string
   content: {
     html: string
   }
@@ -17,6 +18,7 @@ type Exhibitions = {
     id: string
     slug: string
     title: string
+    subtitle?: string
     content: {
       html: string
     }
