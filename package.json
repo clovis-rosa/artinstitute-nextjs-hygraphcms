@@ -2,6 +2,27 @@
   "name": "artinstitute-nextjs-hygraphcms",
   "version": "0.1.0",
   "private": true,
+  "description": "Next.js, TypeScript and HygraphCMS - Art Institute Gallery Website",
+  "author": {
+    "name": "Clovis Rosa",
+    "email": "clovis.souzarosa@gmail.com",
+    "url": "https://clovisrosa.vercel.app/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clovis-rosa/artinstitute-nextjs-hygraphcms.git"
+  },
+  "license": "MIT",
+  "main": "index.html",
+  "keywords": [
+    "nextjs",
+    "markdown",
+    "typescript",
+    "linaria",
+    "mdx",
+    "blog",
+    "portfolio"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
