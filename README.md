@@ -9,3 +9,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Error Messages
 
 - [Styled Components Global style duplicated in Next.js](https://stackoverflow.com/questions/68954877/styled-components-global-style-duplicated-in-next)
+- [Next js failing on build with getStaticProps due to param being undefined](https://stackoverflow.com/questions/70123882/next-js-failing-on-build-with-getstaticprops-due-to-param-being-undefined)

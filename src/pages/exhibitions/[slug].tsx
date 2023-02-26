@@ -1,9 +1,7 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
 import { GraphQLClient, gql } from 'graphql-request'
-import Link from 'next/link'
 import SiteLayout from '@/layouts/SiteLayout'
+import { ParsedUrlQuery } from 'querystring'
 
 const client = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_URL as string)
 
@@ -43,9 +41,9 @@ export default function Exhibition({ exhibition }: IEvent) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params.slug as string
+  const slug = (params as ParsedUrlQuery).slug
 
-  console.log(slug)
+  // console.log(slug)
 
   const query = gql`
     query Exhibition($slug: String!) {
@@ -101,7 +99,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // console.log(`====> slug`, data);
 
   return {
-    paths: data.exhibitions.map((exhibition) => ({
+    paths: data.exhibitions.map((exhibition: any) => ({
       params: { slug: exhibition.slug },
     })),
     fallback: 'blocking',
